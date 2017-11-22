@@ -14,12 +14,10 @@ public class EmployeeService {
 	}
 
 	public List<Employee> allEmployees() {
-		// TODO Auto-generated method stub
 		return repository.allEmployees();
 	}
 
 	public Employee oneEmployee(String id) {
-		// TODO Auto-generated method stub
 		return repository.oneEmployee(id);
 	}
 	
