@@ -31,16 +31,19 @@ public class EmployeeServiceTest {
 	
 	@Test
 	public void testAllEmployeesWithNoEmployees() {
-		List<Employee> result = employeeService.allEmployees();
-		assertEquals(0,result.size());
+		assertAllEmployees(0);
 	}
 	
 	@Test
 	public void testAllEmployees() {
 		list.add(new Employee("Employee 1"));
 		list.add(new Employee("Employee 2"));
+		assertAllEmployees(2);
+	}
+
+	private void assertAllEmployees(int expected) {
 		List<Employee> result = employeeService.allEmployees();
-		assertEquals(2,result.size());
+		assertEquals(expected,result.size());
 	}
 
 }
