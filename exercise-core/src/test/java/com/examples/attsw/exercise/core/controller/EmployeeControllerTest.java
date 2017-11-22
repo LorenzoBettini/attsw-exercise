@@ -48,8 +48,7 @@ public class EmployeeControllerTest {
 	public void testGetEmployeeByIdWhenEmployeeExists() {
 		Employee newEmployee = newEmployee("nameTest", "1");
 		Mockito.when(iEmployeeService.getEmployeeById("1")).thenReturn(newEmployee);
-		String employee = employeeController.getEmployeeById("1");
-		assertEquals(newEmployee.getName(), employee);
+		assertEquals(newEmployee.getName(), employeeController.getEmployeeById("1"));
 	}
 
 	private Employee newEmployee(String name, String id) {
