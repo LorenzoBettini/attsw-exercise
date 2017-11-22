@@ -1,4 +1,4 @@
-package com.examples.attsw.exercise.model.repository.mongo;
+package com.examples.attsw.exercise.core.model.repository.mongo;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -8,19 +8,20 @@ import java.util.stream.StreamSupport;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 
+import com.examples.attsw.exercise.core.repository.Repository;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-public class MongoDatabaseWrapper implements Database {
+public class MongoRepository implements Repository {
 	
 
 	private MongoClient mongoClient;
 	private DBCollection employees;
 
-	public MongoDatabaseWrapper(MongoClient mongoClient) {
+	public MongoRepository(MongoClient mongoClient) {
 		this.mongoClient = mongoClient;
 		DB db = mongoClient.getDB("factory");
 		employees = db.getCollection("employee");
@@ -51,5 +52,7 @@ public class MongoDatabaseWrapper implements Database {
 		) :
 			null;
 	}
+
+	
 
 }
