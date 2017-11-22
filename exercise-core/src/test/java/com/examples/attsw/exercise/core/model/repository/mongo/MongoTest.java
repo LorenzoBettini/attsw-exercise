@@ -27,10 +27,11 @@ public class MongoTest {
 		employees = db.getCollection("employee");
 	
 	}
-
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testGetAllEmployeesEmpty() {
+	assertTrue(database.findAll().isEmpty());
 	}
+
+	
 
 }
