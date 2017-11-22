@@ -1,7 +1,5 @@
 package com.examples.attsw.exercise.core.controller;
 
-import java.util.List;
-
 import com.examples.attsw.exercise.core.model.Employee;
 import com.examples.attsw.exercise.core.service.IEmployeeService;
 
@@ -14,9 +12,8 @@ public class EmployeeController {
 	}
 
 	public String getAllEmployee() {
-		List<Employee> allEmployee = iEmployeeService.getEmployees();
 		String stringEmployee = "";
-		for (Employee employee : allEmployee) {
+		for (Employee employee : iEmployeeService.getEmployees()) {
 			stringEmployee += employee.toString();
 		}
 		return stringEmployee;
