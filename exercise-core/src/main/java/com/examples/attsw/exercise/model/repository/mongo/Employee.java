@@ -1,7 +1,15 @@
 package com.examples.attsw.exercise.model.repository.mongo;
 
-public interface Employee {
+public class Employee {
 
-	String getId();
+	private String id;
 
+	public Employee(String id) {
+		this.id = id;
+	}
+	
+	public String getId() {
+		return this.id;
+	}
+	
 }

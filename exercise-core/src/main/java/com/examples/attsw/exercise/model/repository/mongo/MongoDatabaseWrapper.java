@@ -7,8 +7,12 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
+
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 public class MongoDatabaseWrapper implements Database {
 	
@@ -25,14 +29,27 @@ public class MongoDatabaseWrapper implements Database {
 
 	@Override
 	public List<Employee> findAll() {
-		// TODO Auto-generated method stub
-		return new ArrayList<Employee>();
+		DBCursor cursor = employees.find();
+		return StreamSupport.
+		stream(cursor.spliterator(), false).
+		map(
+		e ->
+		new Employee((String) e.get("id"))).
+		collect(Collectors.toList());
+		
 	}
 
 	@Override
 	public Employee findEmployeeById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+			BasicDBObject searchQuery = new BasicDBObject();
+			searchQuery.put("id", id);
+			DBObject findOne = employees.findOne(searchQuery);
+			return findOne != null ?
+			new Employee((String) findOne.get("id")
+		) :
+			null;
 	}
 
 }
