@@ -34,15 +34,27 @@ public class EmployeeControllerTest {
 
 	@Test
 	public void testGetAllEmployeeWhenThereIsOneEmployee() {
-		Employee employee = new Employee("nameTest","idTest");
+		Employee employee = newEmployee("nameTest", "idTest");
 		employees.add(employee);
 		assertGetAllEmployee(employee.getName());
 	}
-	
+
 	@Test
-	public void testGetEmployeeByIdWhenEmployeeListIsEmpty() {
+	public void testGetEmployeeByIdWhenEmployeeDoesntExists() {
 		Employee employee = employeeController.getEmployeeById("1");
 		assertNull(employee);
+	}
+
+	@Test
+	public void testGetEmployeeByIdWhenEmployeeExists() {
+		Employee newEmployee = newEmployee("nameTest", "1");
+		employees.add(newEmployee);
+		Employee employee = employeeController.getEmployeeById("1");
+		assertEquals(newEmployee.getName(), employee.getName());
+	}
+
+	private Employee newEmployee(String name, String id) {
+		return new Employee(name, id);
 	}
 
 	private void assertGetAllEmployee(String expected) {
