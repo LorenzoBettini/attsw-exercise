@@ -10,18 +10,20 @@
   <name>exercise-core</name>
   <url>http://maven.apache.org</url>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jacoco.data.file>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.data.file>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
 
-  <properties>
-    <jacoco.data.file>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.data.file>
-  </properties>
 
   <profiles>
     <profile>
@@ -50,5 +52,19 @@
       </build>
     </profile>
   </profiles>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
 </project>
