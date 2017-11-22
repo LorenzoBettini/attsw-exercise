@@ -5,6 +5,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.examples.attsw.exercise.model.repository.mongo.Database;
+import com.examples.attsw.exercise.model.repository.mongo.Employee;
 import com.examples.attsw.exercise.model.repository.mongo.MongoDatabaseWrapper;
 import com.github.fakemongo.Fongo;
 import com.mongodb.BasicDBObject;
@@ -31,6 +32,22 @@ public class MongoTest {
 	public void testGetAllEmployeesEmpty() {
 	assertTrue(database.findAll().isEmpty());
 	}
+	@Test
+	public void testOneEmployee() {
+		addEmployee("1");
+		Employee e=database.findEmployeeById("1");
+		assertEquals("1",e.getId());
+		
+		
+	}
+	
+	private void addEmployee(String id) {
+		BasicDBObject document = new BasicDBObject();
+		document.put("id", id);
+		employees.insert(document);
+		
+		
+		}
 
 	
 
