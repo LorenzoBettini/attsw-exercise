@@ -9,4 +9,4 @@ cache:
   - $HOME/.m2
 
 script: 
-  - mvn -f exercise-core/pom.xml clean verify -Pjacoco
+  - mvn -f exercise-parent/pom.xml clean verify -Pjacoco
