@@ -1,6 +1,5 @@
 package com.examples.attsw.exercise.core.controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import com.examples.attsw.exercise.core.model.Employee;
@@ -23,15 +22,8 @@ public class EmployeeController {
 		return stringEmployee;
 	}
 
-	public Employee getEmployeeById(String id) {
-		Iterator<Employee> iteratorAllEmployee = iEmployeeService.getEmployees().iterator();
-		while (iteratorAllEmployee.hasNext()) {
-			Employee actualEmployee = iteratorAllEmployee.next();
-			if (actualEmployee.getId() == id) {
-				return actualEmployee;
-			}
-		}
-		return null;
+	public String getEmployeeById(String id) {
+		return iEmployeeService.getEmployeeById(id).getName();
 	}
 
 }

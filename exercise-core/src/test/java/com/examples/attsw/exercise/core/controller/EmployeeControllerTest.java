@@ -16,15 +16,15 @@ public class EmployeeControllerTest {
 
 	// SUT
 	public EmployeeController employeeController;
-	private List<Employee> employees;
+	private List<Employee> listEmployees;
 	private IEmployeeService iEmployeeService;
 
 	@Before
 	public void setUp() throws Exception {
 		iEmployeeService = Mockito.mock(IEmployeeService.class);
 		employeeController = new EmployeeController(iEmployeeService);
-		employees = new LinkedList<Employee>();
-		Mockito.when(iEmployeeService.getEmployees()).thenReturn(employees);
+		listEmployees = new LinkedList<Employee>();
+		Mockito.when(iEmployeeService.getEmployees()).thenReturn(listEmployees);
 	}
 
 	@Test
@@ -35,22 +35,21 @@ public class EmployeeControllerTest {
 	@Test
 	public void testGetAllEmployeeWhenThereIsOneEmployee() {
 		Employee employee = newEmployee("nameTest", "idTest");
-		employees.add(employee);
+		listEmployees.add(employee);
 		assertGetAllEmployee(employee.getName());
 	}
 
-	@Test
+	@Test (expected = NullPointerException.class)
 	public void testGetEmployeeByIdWhenEmployeeDoesntExists() {
-		Employee employee = employeeController.getEmployeeById("1");
-		assertNull(employee);
+		assertEquals(null, employeeController.getEmployeeById("1"));
 	}
 
 	@Test
 	public void testGetEmployeeByIdWhenEmployeeExists() {
 		Employee newEmployee = newEmployee("nameTest", "1");
-		employees.add(newEmployee);
-		Employee employee = employeeController.getEmployeeById("1");
-		assertEquals(newEmployee.getName(), employee.getName());
+		Mockito.when(iEmployeeService.getEmployeeById("1")).thenReturn(newEmployee);
+		String employee = employeeController.getEmployeeById("1");
+		assertEquals(newEmployee.getName(), employee);
 	}
 
 	private Employee newEmployee(String name, String id) {
