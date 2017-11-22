@@ -12,6 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jacoco.data.file>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.data.file>
   </properties>
 
   <dependencies>
@@ -29,6 +30,35 @@
     </dependency>
   </dependencies>
 
+
+  <profiles>
+    <profile>
+      <id>jacoco</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.7.9</version>
+            <executions>
+              <execution>
+                <goals>
+                  <!-- binds by default to the phase "initialize" -->
+                  <goal>prepare-agent</goal>
+                  <!-- binds by default to the phase "verify" -->
+                  <goal>report</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
   <build>
     <pluginManagement>
       <plugins>
@@ -42,4 +72,5 @@
       </plugins>
     </pluginManagement>
   </build>
+
 </project>
