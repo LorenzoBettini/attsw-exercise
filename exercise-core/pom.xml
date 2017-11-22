@@ -10,10 +10,6 @@
   <name>exercise-core</name>
   <url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -22,4 +18,37 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <properties>
+    <jacoco.data.file>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.data.file>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id> jacoco</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.7.9</version>
+            <executions>
+              <execution>
+                <goals>
+                  <!-- binds by default to the phase "initialize" -->
+                  <goal>prepare-agent</goal>
+                  <!-- binds by default to the phase "verify" -->
+                  <goal>report</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
