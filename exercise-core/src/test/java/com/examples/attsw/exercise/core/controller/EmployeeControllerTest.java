@@ -14,6 +14,7 @@ import com.examples.attsw.exercise.core.service.IEmployeeService;
 
 public class EmployeeControllerTest {
 
+	// SUT
 	public EmployeeController employeeController;
 	private List<Employee> employees;
 	private IEmployeeService iEmployeeService;
@@ -33,9 +34,15 @@ public class EmployeeControllerTest {
 
 	@Test
 	public void testGetAllEmployeeWhenThereIsOneEmployee() {
-		Employee employee = new Employee("nameTest");
+		Employee employee = new Employee("nameTest","idTest");
 		employees.add(employee);
 		assertGetAllEmployee(employee.getName());
+	}
+	
+	@Test
+	public void testGetEmployeeByIdWhenEmployeeListIsEmpty() {
+		Employee employee = employeeController.getEmployeeById("1");
+		assertNull(employee);
 	}
 
 	private void assertGetAllEmployee(String expected) {
