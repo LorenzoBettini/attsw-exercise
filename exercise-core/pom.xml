@@ -27,7 +27,7 @@
 
   <profiles>
     <profile>
-      <id> jacoco</id>
+      <id>jacoco</id>
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
