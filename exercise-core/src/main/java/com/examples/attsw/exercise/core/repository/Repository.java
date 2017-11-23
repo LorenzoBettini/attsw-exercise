@@ -6,6 +6,7 @@ import com.examples.attsw.exercise.core.model.*;
 
 public interface Repository {
 	List<Employee> findAll();
+
 	Employee findEmployeeById(String id);
-	
+
 }
