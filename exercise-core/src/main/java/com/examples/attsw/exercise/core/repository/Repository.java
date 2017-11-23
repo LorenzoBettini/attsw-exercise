@@ -5,8 +5,12 @@ import java.util.List;
 import com.examples.attsw.exercise.core.model.*;
 
 public interface Repository {
-	List<Employee> findAll();
 
-	Employee findEmployeeById(String id);
+	/**
+	 * It is assumed that allEmployees() never returns a NULL lists
+	 */
+	public List<Employee> findAll();
+
+	public Employee findEmployeeById(String id);
 
 }
