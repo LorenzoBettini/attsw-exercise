@@ -36,8 +36,31 @@ public class MongoRepositoryTest {
 	@Test
 	public void testOneEmployee() {
 		addEmployee("1");
-		Employee e = database.findEmployeeById("1");
-		assertEquals("1", e.getId());
+		assertEquals(1, database.findAll().size());
+
+	}
+
+	@Test
+	public void testEmployeessize() {
+		addEmployee("1");
+		addEmployee("2");
+		assertEquals(2, database.findAll().size());
+
+	}
+
+	@Test
+	public void testNotFound() {
+		assertNull(database.findEmployeeById("1"));
+
+	}
+
+	@Test
+	public void testFound() {
+		addEmployee("1");
+		addEmployee("2");
+		Employee e = database.findEmployeeById("2");
+		assertNotNull(e);
+		assertEquals("2", e.getId());
 
 	}
 
