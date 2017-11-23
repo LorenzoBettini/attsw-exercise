@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
-
-import com.examples.attsw.exercise.core.model.repository.mongo.Employee;
+import com.examples.attsw.exercise.core.model.Employee;
 import com.examples.attsw.exercise.core.repository.Repository;
+import com.examples.attsw.exercise.core.repository.mongo.MongoRepository;
 import com.github.fakemongo.Fongo;
 import com.mongodb.BasicDBObject;
 import java.util.List;

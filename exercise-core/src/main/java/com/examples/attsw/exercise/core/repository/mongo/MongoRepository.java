@@ -1,4 +1,4 @@
-package com.examples.attsw.exercise.core.model.repository.mongo;
+package com.examples.attsw.exercise.core.repository.mongo;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import java.util.stream.StreamSupport;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 
+import com.examples.attsw.exercise.core.model.Employee;
 import com.examples.attsw.exercise.core.repository.Repository;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;

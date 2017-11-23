@@ -1,4 +1,4 @@
-package com.examples.attsw.exercise.core.model.repository.mongo;
+package com.examples.attsw.exercise.core.model;
 
 public class Employee {
 
