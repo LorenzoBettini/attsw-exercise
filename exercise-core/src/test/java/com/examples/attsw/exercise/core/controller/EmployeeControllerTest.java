@@ -34,15 +34,15 @@ public class EmployeeControllerTest {
 
 	@Test
 	public void testGetAllEmployeeWhenThereIsOneEmployee() {
-		Employee employee = newEmployee("nameTest", "idTest");
+		Employee employee = newEmployee("idTest", "nameTest");
 		listEmployees.add(employee);
 		assertGetAllEmployee(extractAllEmployeeStringFromList(listEmployees));
 	}
 	
 	@Test
-	public void testGetAllEmployeeWhenThereIsTwoEmployee() {
-		Employee employee0 = newEmployee("nameEmployee0", "idEmployee0");
-		Employee employee1 = newEmployee("nameEmployee1", "idEmployee1");
+	public void testGetAllEmployeeWhenThereAreTwoEmployee() {
+		Employee employee0 = newEmployee("idEmployee0", "nameEmployee0");
+		Employee employee1 = newEmployee("idEmployee1", "nameEmployee1");
 		listEmployees.add(employee0);
 		listEmployees.add(employee1);
 		assertGetAllEmployee(extractAllEmployeeStringFromList(listEmployees));
@@ -55,7 +55,7 @@ public class EmployeeControllerTest {
 
 	@Test
 	public void testGetEmployeeByIdWhenEmployeeExists() {
-		Employee newEmployee = newEmployee("nameTest", "1");
+		Employee newEmployee = newEmployee("1", "nameTest");
 		when(employeeService.getEmployeeById("1")).thenReturn(newEmployee);
 		assertEquals(newEmployee.getName(), employeeController.getEmployeeById("1"));
 	}
@@ -68,8 +68,8 @@ public class EmployeeControllerTest {
 		return stringAllEmployee;
 	}
 
-	private Employee newEmployee(String name, String id) {
-		return new Employee(name, id);
+	private Employee newEmployee(String id, String name) {
+		return new Employee(id, name);
 	}
 
 	private void assertGetAllEmployee(String expected) {

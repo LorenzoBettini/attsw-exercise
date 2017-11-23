@@ -2,10 +2,10 @@ package com.examples.attsw.exercise.core.model;
 
 public class Employee {
 
-	private String name;
 	private String id;
+	private String name;
 
-	public Employee(String name, String id) {
+	public Employee(String id, String name) {
 		this.name = name;
 		this.id = id;
 	}
@@ -20,7 +20,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [name=" + name + ", id=" + id + "]";
+		return "Employee [id=" + id + ", name=" + name + "]";
 	}
 	
 }

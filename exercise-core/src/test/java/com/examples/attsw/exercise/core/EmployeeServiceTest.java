@@ -36,8 +36,8 @@ public class EmployeeServiceTest {
 	
 	@Test
 	public void testAllEmployees() {
-		list.add(new Employee("nameTest1","Employee 1"));
-		list.add(new Employee("nameTest2","Employee 2"));
+		list.add(new Employee("Employee 1","nameTest1"));
+		list.add(new Employee("Employee 2","nameTest2"));
 		assertAllEmployees(2);
 	}
 	
@@ -51,7 +51,7 @@ public class EmployeeServiceTest {
 	
 	@Test
 	public void testOneEmployee() {
-		when(repository.oneEmployee("Employee 1")).thenReturn(new Employee("nameTest","Employee 1"));
+		when(repository.oneEmployee("Employee 1")).thenReturn(new Employee("Employee 1","nameTest"));
 		Employee result = employeeService.oneEmployee("Employee 1");
 		assertNotNull(result);
 		assertEquals("Employee 1",result.getId());
