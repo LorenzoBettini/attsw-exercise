@@ -7,9 +7,9 @@ public class Employee {
 	public Employee(String id) {
 		this.id = id;
 	}
-	
+
 	public String getId() {
 		return this.id;
 	}
-	
+
 }

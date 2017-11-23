@@ -14,11 +14,11 @@ public class EmployeeService {
 	}
 
 	public List<Employee> allEmployees() {
-		return repository.allEmployees();
+		return repository.findAll();
 	}
 
 	public Employee oneEmployee(String id) {
-		return repository.oneEmployee(id);
+		return repository.findEmployeeById(id);
 	}
 	
 }
