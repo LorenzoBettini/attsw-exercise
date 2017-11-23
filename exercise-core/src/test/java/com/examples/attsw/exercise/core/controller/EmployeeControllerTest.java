@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,10 +63,9 @@ public class EmployeeControllerTest {
 	}
 
 	private String extractAllEmployeeStringFromList(List<Employee> allEmployee) {
-		String stringAllEmployee = "";
-		for (Employee employee : allEmployee) {
-			stringAllEmployee += employee.toString() + System.getProperty("line.separator");
-		}
+		String stringAllEmployee = allEmployee.stream()
+				.map(employee -> employee.toString() + System.getProperty("line.separator"))
+				.collect(Collectors.joining());
 		return stringAllEmployee;
 	}
 
