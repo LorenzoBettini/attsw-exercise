@@ -1,13 +1,13 @@
 package com.examples.attsw.exercise.core.controller;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import com.examples.attsw.exercise.core.model.Employee;
 import com.examples.attsw.exercise.core.service.IEmployeeService;
@@ -17,14 +17,14 @@ public class EmployeeControllerTest {
 	// SUT
 	public EmployeeController employeeController;
 	private List<Employee> listEmployees;
-	private IEmployeeService iEmployeeService;
+	private IEmployeeService employeeService;
 
 	@Before
 	public void setUp() throws Exception {
-		iEmployeeService = Mockito.mock(IEmployeeService.class);
-		employeeController = new EmployeeController(iEmployeeService);
+		employeeService = mock(IEmployeeService.class);
+		employeeController = new EmployeeController(employeeService);
 		listEmployees = new LinkedList<Employee>();
-		Mockito.when(iEmployeeService.getEmployees()).thenReturn(listEmployees);
+		when(employeeService.getEmployees()).thenReturn(listEmployees);
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public class EmployeeControllerTest {
 	public void testGetAllEmployeeWhenThereIsOneEmployee() {
 		Employee employee = newEmployee("nameTest", "idTest");
 		listEmployees.add(employee);
-		assertGetAllEmployee(employee.getName());
+		assertGetAllEmployee("Employee [name="+employee.getName()+", id="+employee.getId()+"]");
 	}
 
 	@Test (expected = NullPointerException.class)
@@ -47,7 +47,7 @@ public class EmployeeControllerTest {
 	@Test
 	public void testGetEmployeeByIdWhenEmployeeExists() {
 		Employee newEmployee = newEmployee("nameTest", "1");
-		Mockito.when(iEmployeeService.getEmployeeById("1")).thenReturn(newEmployee);
+		when(employeeService.getEmployeeById("1")).thenReturn(newEmployee);
 		assertEquals(newEmployee.getName(), employeeController.getEmployeeById("1"));
 	}
 

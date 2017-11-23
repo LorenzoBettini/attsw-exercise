@@ -5,22 +5,22 @@ import com.examples.attsw.exercise.core.service.IEmployeeService;
 
 public class EmployeeController {
 
-	private IEmployeeService iEmployeeService;
+	private IEmployeeService employeeService;
 
 	public EmployeeController(IEmployeeService iEmployeeService) {
-		this.iEmployeeService = iEmployeeService;
+		this.employeeService = iEmployeeService;
 	}
 
 	public String getAllEmployee() {
 		String stringEmployee = "";
-		for (Employee employee : iEmployeeService.getEmployees()) {
+		for (Employee employee : employeeService.getEmployees()) {
 			stringEmployee += employee.toString();
 		}
 		return stringEmployee;
 	}
 
 	public String getEmployeeById(String id) {
-		return iEmployeeService.getEmployeeById(id).getName();
+		return employeeService.getEmployeeById(id).getName();
 	}
 
 }
