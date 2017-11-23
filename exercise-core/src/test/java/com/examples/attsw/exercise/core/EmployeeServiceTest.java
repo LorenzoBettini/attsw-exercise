@@ -25,7 +25,7 @@ public class EmployeeServiceTest {
 	public void init() {
 		list = new ArrayList<Employee>();
 		repository = mock(Repository.class);
-		when(repository.allEmployees()).thenReturn(list);
+		when(repository.findAll()).thenReturn(list);
 		employeeService = new EmployeeService(repository);
 	}
 	
@@ -43,25 +43,25 @@ public class EmployeeServiceTest {
 	
 	@Test
 	public void testOneEmployeeWhenItsNotThere() {
-		when(repository.oneEmployee("Employee 1")).thenReturn(null);
+		when(repository.findEmployeeById("Employee 1")).thenReturn(null);
 		Employee result = employeeService.oneEmployee("Employee 1");
 		assertNull(result);
-		verify(repository,times(1)).oneEmployee("Employee 1");
+		verify(repository,times(1)).findEmployeeById("Employee 1");
 	}
 	
 	@Test
 	public void testOneEmployee() {
-		when(repository.oneEmployee("Employee 1")).thenReturn(new Employee("Employee 1","nameTest"));
+		when(repository.findEmployeeById("Employee 1")).thenReturn(new Employee("Employee 1","nameTest"));
 		Employee result = employeeService.oneEmployee("Employee 1");
 		assertNotNull(result);
 		assertEquals("Employee 1",result.getId());
-		verify(repository,times(1)).oneEmployee("Employee 1");
+		verify(repository,times(1)).findEmployeeById("Employee 1");
 	}
 
 	private void assertAllEmployees(int expected) {
 		List<Employee> result = employeeService.allEmployees();
 		assertEquals(expected,result.size());
-		verify(repository,times(1)).allEmployees();
+		verify(repository,times(1)).findAll();
 	}
 
 }

@@ -1,7 +1,8 @@
 package com.examples.attsw.exercise.core.controller;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class EmployeeControllerTest {
 		listEmployees.add(employee);
 		assertGetAllEmployee(extractAllEmployeeStringFromList(listEmployees));
 	}
-	
+
 	@Test
 	public void testGetAllEmployeeWhenThereAreTwoEmployee() {
 		Employee employee0 = newEmployee("idEmployee0", "nameEmployee0");
@@ -48,7 +49,7 @@ public class EmployeeControllerTest {
 		assertGetAllEmployee(extractAllEmployeeStringFromList(listEmployees));
 	}
 
-	@Test (expected = NullPointerException.class)
+	@Test(expected = NullPointerException.class)
 	public void testGetEmployeeByIdWhenEmployeeDoesntExists() {
 		assertEquals(null, employeeController.getEmployeeById("1"));
 	}
@@ -59,7 +60,7 @@ public class EmployeeControllerTest {
 		when(employeeService.getEmployeeById("1")).thenReturn(newEmployee);
 		assertEquals(newEmployee.getName(), employeeController.getEmployeeById("1"));
 	}
-	
+
 	private String extractAllEmployeeStringFromList(List<Employee> allEmployee) {
 		String stringAllEmployee = "";
 		for (Employee employee : allEmployee) {
