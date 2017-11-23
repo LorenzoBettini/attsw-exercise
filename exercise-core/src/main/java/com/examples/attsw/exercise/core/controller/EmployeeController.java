@@ -14,7 +14,7 @@ public class EmployeeController {
 	public String getAllEmployee() {
 		String stringEmployee = "";
 		for (Employee employee : employeeService.getEmployees()) {
-			stringEmployee += employee.toString();
+			stringEmployee += employee.toString() + System.getProperty("line.separator");
 		}
 		return stringEmployee;
 	}

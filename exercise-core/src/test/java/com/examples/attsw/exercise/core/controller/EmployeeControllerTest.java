@@ -36,7 +36,16 @@ public class EmployeeControllerTest {
 	public void testGetAllEmployeeWhenThereIsOneEmployee() {
 		Employee employee = newEmployee("nameTest", "idTest");
 		listEmployees.add(employee);
-		assertGetAllEmployee("Employee [name="+employee.getName()+", id="+employee.getId()+"]");
+		assertGetAllEmployee(extractAllEmployeeStringFromList(listEmployees));
+	}
+	
+	@Test
+	public void testGetAllEmployeeWhenThereIsTwoEmployee() {
+		Employee employee0 = newEmployee("nameEmployee0", "idEmployee0");
+		Employee employee1 = newEmployee("nameEmployee1", "idEmployee1");
+		listEmployees.add(employee0);
+		listEmployees.add(employee1);
+		assertGetAllEmployee(extractAllEmployeeStringFromList(listEmployees));
 	}
 
 	@Test (expected = NullPointerException.class)
@@ -49,6 +58,14 @@ public class EmployeeControllerTest {
 		Employee newEmployee = newEmployee("nameTest", "1");
 		when(employeeService.getEmployeeById("1")).thenReturn(newEmployee);
 		assertEquals(newEmployee.getName(), employeeController.getEmployeeById("1"));
+	}
+	
+	private String extractAllEmployeeStringFromList(List<Employee> allEmployee) {
+		String stringAllEmployee = "";
+		for (Employee employee : allEmployee) {
+			stringAllEmployee += employee.toString() + System.getProperty("line.separator");
+		}
+		return stringAllEmployee;
 	}
 
 	private Employee newEmployee(String name, String id) {
