@@ -8,8 +8,8 @@
   <packaging>pom</packaging>
   
   <modules>
-    <module>exercise-app</module>
-    <module>exercise-core</module>
+    <module>../exercise-app</module>
+    <module>../exercise-core</module>
   </modules>
   
   <properties>

@@ -6,6 +6,7 @@
     <groupId>com.examples.attsw</groupId>
     <artifactId>exercise-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../exercise-parent/pom.xml</relativePath>
   </parent>
   
   <artifactId>exercise-core</artifactId>
