@@ -17,7 +17,7 @@ import org.junit.Test;
 public class MongoTest {
 	private Repository database;
 	private DBCollection employees;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		Fongo fongo = new Fongo("mongo server 1");
@@ -26,29 +26,27 @@ public class MongoTest {
 		db.getCollection("employee").drop();
 		database = new MongoRepository(mongoClient);
 		employees = db.getCollection("employee");
-	
+
 	}
+
 	@Test
 	public void testGetAllEmployeesEmpty() {
-	assertTrue(database.findAll().isEmpty());
+		assertTrue(database.findAll().isEmpty());
 	}
+
 	@Test
 	public void testOneEmployee() {
 		addEmployee("1");
-		Employee e=database.findEmployeeById("1");
-		assertEquals("1",e.getId());
-		
-		
+		Employee e = database.findEmployeeById("1");
+		assertEquals("1", e.getId());
+
 	}
-	
+
 	private void addEmployee(String id) {
 		BasicDBObject document = new BasicDBObject();
 		document.put("id", id);
 		employees.insert(document);
-		
-		
-		}
 
-	
+	}
 
 }
