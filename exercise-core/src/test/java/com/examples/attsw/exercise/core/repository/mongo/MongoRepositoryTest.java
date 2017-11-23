@@ -25,7 +25,6 @@ public class MongoRepositoryTest {
 		db.getCollection("employee").drop();
 		database = new MongoRepository(mongoClient);
 		employees = db.getCollection("employee");
-
 	}
 
 	@Test
@@ -37,7 +36,6 @@ public class MongoRepositoryTest {
 	public void testOneEmployee() {
 		addEmployee("1");
 		assertEquals(1, database.findAll().size());
-
 	}
 
 	@Test
@@ -45,13 +43,11 @@ public class MongoRepositoryTest {
 		addEmployee("1");
 		addEmployee("2");
 		assertEquals(2, database.findAll().size());
-
 	}
 
 	@Test
 	public void testNotFound() {
 		assertNull(database.findEmployeeById("1"));
-
 	}
 
 	@Test
@@ -61,13 +57,11 @@ public class MongoRepositoryTest {
 		Employee e = database.findEmployeeById("2");
 		assertNotNull(e);
 		assertEquals("2", e.getId());
-
 	}
 
 	private void addEmployee(String id) {
 		BasicDBObject document = new BasicDBObject();
 		document.put("id", id);
 		employees.insert(document);
-
 	}
 }

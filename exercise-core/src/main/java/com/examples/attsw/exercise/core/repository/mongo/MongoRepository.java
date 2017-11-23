@@ -1,12 +1,9 @@
 package com.examples.attsw.exercise.core.repository.mongo;
 
-import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-import org.jongo.Jongo;
-import org.jongo.MongoCollection;
+
 
 import com.examples.attsw.exercise.core.model.Employee;
 import com.examples.attsw.exercise.core.repository.Repository;
@@ -26,7 +23,6 @@ public class MongoRepository implements Repository {
 		this.mongoClient = mongoClient;
 		DB db = mongoClient.getDB("factory");
 		employees = db.getCollection("employee");
-
 	}
 
 	@Override
