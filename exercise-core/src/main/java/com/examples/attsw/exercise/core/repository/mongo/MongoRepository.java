@@ -15,7 +15,6 @@ import com.mongodb.MongoClient;
 
 public class MongoRepository implements Repository {
 
-	@SuppressWarnings("unused")
 	private MongoClient mongoClient;
 	private DBCollection employees;
 
