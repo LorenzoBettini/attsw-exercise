@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-
 import com.examples.attsw.exercise.core.model.Employee;
 import com.examples.attsw.exercise.core.repository.Repository;
 import com.mongodb.BasicDBObject;
@@ -28,8 +27,8 @@ public class MongoRepository implements Repository {
 	@Override
 	public List<Employee> findAll() {
 		DBCursor cursor = employees.find();
-		return StreamSupport.stream(cursor.spliterator(), false).map(e -> new Employee((String) e.get("id")))
-				.collect(Collectors.toList());
+		return StreamSupport.stream(cursor.spliterator(), false)
+				.map(e -> new Employee((String) e.get("id"), (String) e.get("name"))).collect(Collectors.toList());
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public class MongoRepository implements Repository {
 		BasicDBObject searchQuery = new BasicDBObject();
 		searchQuery.put("id", id);
 		DBObject findOne = employees.findOne(searchQuery);
-		return findOne != null ? new Employee((String) findOne.get("id")) : null;
+		return findOne != null ? new Employee((String) findOne.get("id"), "name") : null;
 	}
 
 }
