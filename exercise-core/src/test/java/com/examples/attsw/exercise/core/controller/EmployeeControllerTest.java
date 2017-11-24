@@ -73,7 +73,7 @@ public class EmployeeControllerTest {
 	}
 
 	private void assertGetAllEmployees(String expected) {
-		String allEmployees = employeeController.getAllEmployee();
+		String allEmployees = employeeController.getAllEmployees();
 		assertEquals(expected, allEmployees);
 	}
 

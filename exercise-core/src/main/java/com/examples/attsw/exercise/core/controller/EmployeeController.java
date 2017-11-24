@@ -12,7 +12,7 @@ public class EmployeeController {
 		this.employeeService = iEmployeeService;
 	}
 
-	public String getAllEmployee() {
+	public String getAllEmployees() {
 		String stringEmployee = employeeService.getEmployees().stream()
 				.map(employee -> employee.toString() + System.getProperty("line.separator"))
 				.collect(Collectors.joining());
