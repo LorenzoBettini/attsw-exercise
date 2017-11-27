@@ -18,7 +18,11 @@ public class AppController {
 			if (actionCode.equals("showAll")) {
 				out.print(allEmployees);
 			} else if (actionCode.equals("showOne")) {
-				out.print(employeeController.getEmployeeById(arg));
+				String employeeById = employeeController.getEmployeeById(arg);
+				if (employeeById.equals("")) {
+					out.print("There are no Employee with this id");
+				}
+				out.print(employeeById);
 			}
 			return;
 		}

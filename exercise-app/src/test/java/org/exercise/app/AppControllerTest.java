@@ -16,7 +16,6 @@ import com.examples.attsw.exercise.core.model.Employee;
 
 public class AppControllerTest {
 
-	// SUT
 	private AppController appController;
 	private IEmployeeController employeeController;
 	private String allEmployees;
@@ -49,11 +48,18 @@ public class AppControllerTest {
 	public void testShowOneWhenThereAreNoEmployees() {
 		assertShowWhat("There are no Employees", "showOne", "1");
 	}
-	
+
 	@Test
-	public void testShowOneWhenThereIsOneEmployee() {
+	public void testShowOneWheneEmployeeDoesNotExists() {
+		allEmployees = concatNewEmployee("1", "name1");
+		when(employeeController.getEmployeeById("2")).thenReturn("");
+		assertShowWhat("There are no Employee with this id", "showOne", "2");
+	}
+
+	@Test
+	public void testShowOneWhenEmployeeExists() {
 		Employee employee = createNewEmployee("1", "name1");
-		allEmployees = concatNewEmployee(employee.getId(), employee.getName()); 
+		allEmployees = concatNewEmployee(employee.getId(), employee.getName());
 		when(employeeController.getEmployeeById(employee.getId())).thenReturn(employee.getName());
 		assertShowWhat(employee.getName(), "showOne", employee.getId());
 	}
