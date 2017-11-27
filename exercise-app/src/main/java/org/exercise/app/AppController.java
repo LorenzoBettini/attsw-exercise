@@ -16,7 +16,7 @@ public class AppController {
 		if (actionCode.equals("showAll")) {
 			String allEmployees = employeeController.getAllEmployees();
 			if (!allEmployees.equals("")) {
-				out.println(allEmployees);
+				out.print(allEmployees);
 				return;
 			}
 		}

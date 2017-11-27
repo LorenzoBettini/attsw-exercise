@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ import com.examples.attsw.exercise.core.model.Employee;
 public class AppControllerTest {
 
 	// SUT
-	AppController appController;
+	private AppController appController;
 	private IEmployeeController employeeController;
 	private String allEmployees;
 
@@ -25,8 +26,9 @@ public class AppControllerTest {
 	public void setUp() throws Exception {
 		allEmployees = "";
 		employeeController = mock(IEmployeeController.class);
-		when(employeeController.getAllEmployees()).thenReturn(allEmployees);
 		appController = new AppController(employeeController);
+
+		when(employeeController.getAllEmployees()).thenReturn(allEmployees);
 	}
 
 	@Test
@@ -36,9 +38,22 @@ public class AppControllerTest {
 
 	@Test
 	public void testShowAllWhenThereIsOneEmployee() {
-		Employee employee = new Employee("1", "name1");
-		allEmployees = allEmployees.concat(employee.toString());
+		allEmployees = concatNewEmployee("1", "name1");
 		assertShowAll(allEmployees);
+	}
+
+	@Test
+	public void testShowAllWhenThereAreTwoEmployees() {
+		allEmployees = concatNewEmployee("1", "name1").concat(concatNewEmployee("2", "name2"));
+		assertShowAll(allEmployees);
+	}
+
+	private String concatNewEmployee(String id, String name) {
+		return (createNewEmployee(id, name).toString()).concat(System.getProperty("line.separator"));
+	}
+
+	private Employee createNewEmployee(String id, String name) {
+		return new Employee(id, name);
 	}
 
 	private void assertShowAll(String expected) {
