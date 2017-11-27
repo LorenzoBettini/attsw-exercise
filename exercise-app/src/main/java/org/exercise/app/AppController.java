@@ -13,10 +13,13 @@ public class AppController {
 	}
 
 	public void performAction(String actionCode, String arg, PrintStream out) {
-		if (actionCode.equals("showAll")) {
-			String allEmployees = employeeController.getAllEmployees();
-			if (!allEmployees.equals("")) {
+		String allEmployees = employeeController.getAllEmployees();
+		if (!allEmployees.equals("")) {
+			if (actionCode.equals("showAll")) {
 				out.print(allEmployees);
+				return;
+			} else if (actionCode.equals("showOne")) {
+				out.print(employeeController.getEmployeeById(arg));
 				return;
 			}
 		}

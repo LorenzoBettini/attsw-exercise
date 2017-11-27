@@ -30,19 +30,24 @@ public class AppControllerTest {
 
 	@Test
 	public void testShowAllWhenThereAreNoEmployees() {
-		assertShowAll("There are no Employees");
+		assertShowWhat("There are no Employees", "showAll", "");
 	}
 
 	@Test
 	public void testShowAllWhenThereIsOneEmployee() {
 		allEmployees = concatNewEmployee("1", "name1");
-		assertShowAll(allEmployees);
+		assertShowWhat(allEmployees, "showAll", "");
 	}
 
 	@Test
 	public void testShowAllWhenThereAreTwoEmployees() {
 		allEmployees = concatNewEmployee("1", "name1").concat(concatNewEmployee("2", "name2"));
-		assertShowAll(allEmployees);
+		assertShowWhat(allEmployees, "showAll", "");
+	}
+
+	@Test
+	public void testShowOneWhenThereAreNoEmployees() {
+		assertShowWhat("There are no Employees", "showOne", "1");
 	}
 
 	private String concatNewEmployee(String id, String name) {
@@ -53,12 +58,11 @@ public class AppControllerTest {
 		return new Employee(id, name);
 	}
 
-	private void assertShowAll(String expected) {
+	private void assertShowWhat(String expected, String showWhat, String arg) {
 		when(employeeController.getAllEmployees()).thenReturn(allEmployees);
-		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(baos);
-		appController.performAction("showAll", null, out);
+		appController.performAction(showWhat, arg, out);
 		assertEquals(expected, new String(baos.toByteArray(), StandardCharsets.UTF_8));
 	}
 
