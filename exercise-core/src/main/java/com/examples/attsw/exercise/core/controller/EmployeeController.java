@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 import com.examples.attsw.exercise.core.service.IEmployeeService;
 
-public class EmployeeController {
+public class EmployeeController implements IEmployeeController{
 
 	private IEmployeeService employeeService;
 
