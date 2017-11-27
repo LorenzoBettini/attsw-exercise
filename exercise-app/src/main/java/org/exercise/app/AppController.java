@@ -17,11 +17,10 @@ public class AppController {
 		if (!allEmployees.equals("")) {
 			if (actionCode.equals("showAll")) {
 				out.print(allEmployees);
-				return;
 			} else if (actionCode.equals("showOne")) {
 				out.print(employeeController.getEmployeeById(arg));
-				return;
 			}
+			return;
 		}
 		out.print("There are no Employees");
 	}

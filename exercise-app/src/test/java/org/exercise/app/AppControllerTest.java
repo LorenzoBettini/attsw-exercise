@@ -49,6 +49,14 @@ public class AppControllerTest {
 	public void testShowOneWhenThereAreNoEmployees() {
 		assertShowWhat("There are no Employees", "showOne", "1");
 	}
+	
+	@Test
+	public void testShowOneWhenThereIsOneEmployee() {
+		Employee employee = createNewEmployee("1", "name1");
+		allEmployees = concatNewEmployee(employee.getId(), employee.getName()); 
+		when(employeeController.getEmployeeById(employee.getId())).thenReturn(employee.getName());
+		assertShowWhat(employee.getName(), "showOne", employee.getId());
+	}
 
 	private String concatNewEmployee(String id, String name) {
 		return (createNewEmployee(id, name).toString()).concat(System.getProperty("line.separator"));
