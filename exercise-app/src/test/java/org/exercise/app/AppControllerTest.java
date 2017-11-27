@@ -64,6 +64,11 @@ public class AppControllerTest {
 		assertShowWhat(employee.getName(), "showOne", employee.getId());
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testOtherStringInActionCodeArgument() {
+		assertShowWhat("", "", "");
+	}
+
 	private String concatNewEmployee(String id, String name) {
 		return (createNewEmployee(id, name).toString()).concat(System.getProperty("line.separator"));
 	}

@@ -12,21 +12,25 @@ public class AppController {
 		this.employeeController = employeeController;
 	}
 
-	public void performAction(String actionCode, String arg, PrintStream out) {
-		String allEmployees = employeeController.getAllEmployees();
-		if (!allEmployees.equals("")) {
-			if (actionCode.equals("showAll")) {
-				out.print(allEmployees);
-			} else if (actionCode.equals("showOne")) {
-				String employeeById = employeeController.getEmployeeById(arg);
-				if (employeeById.equals("")) {
-					out.print("There are no Employee with this id");
+	public void performAction(String actionCode, String arg, PrintStream out) throws IllegalArgumentException {
+		if (actionCode.equals("showAll") || actionCode.equals("showOne")) {
+			String allEmployees = employeeController.getAllEmployees();
+			if (!allEmployees.equals("")) {
+				if (actionCode.equals("showAll")) {
+					out.print(allEmployees);
+				} else if (actionCode.equals("showOne")) {
+					String employeeById = employeeController.getEmployeeById(arg);
+					if (employeeById.equals("")) {
+						out.print("There are no Employee with this id");
+					}
+					out.print(employeeById);
 				}
-				out.print(employeeById);
+				return;
 			}
-			return;
+			out.print("There are no Employees");
+		} else {
+			throw new IllegalArgumentException();
 		}
-		out.print("There are no Employees");
 	}
 
 }
