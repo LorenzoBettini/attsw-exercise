@@ -15,11 +15,12 @@ public class AppController {
 	public void performAction(String actionCode, String arg, PrintStream out) {
 		if (actionCode.equals("showAll")) {
 			String allEmployees = employeeController.getAllEmployees();
-			if (allEmployees.equals("")) {
-				out.print("There are no Employees");
+			if (!allEmployees.equals("")) {
+				out.println(allEmployees);
 				return;
 			}
 		}
+		out.print("There are no Employees");
 	}
 
 }
