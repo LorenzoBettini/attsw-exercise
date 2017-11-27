@@ -30,21 +30,18 @@ public class AppControllerTest {
 
 	@Test
 	public void testShowAllWhenThereAreNoEmployees() {
-		when(employeeController.getAllEmployees()).thenReturn("");
 		assertShowAll("There are no Employees");
 	}
 
 	@Test
 	public void testShowAllWhenThereIsOneEmployee() {
 		allEmployees = concatNewEmployee("1", "name1");
-		when(employeeController.getAllEmployees()).thenReturn(allEmployees);
 		assertShowAll(allEmployees);
 	}
 
 	@Test
 	public void testShowAllWhenThereAreTwoEmployees() {
 		allEmployees = concatNewEmployee("1", "name1").concat(concatNewEmployee("2", "name2"));
-		when(employeeController.getAllEmployees()).thenReturn(allEmployees);
 		assertShowAll(allEmployees);
 	}
 
@@ -57,6 +54,8 @@ public class AppControllerTest {
 	}
 
 	private void assertShowAll(String expected) {
+		when(employeeController.getAllEmployees()).thenReturn(allEmployees);
+		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(baos);
 		appController.performAction("showAll", null, out);
