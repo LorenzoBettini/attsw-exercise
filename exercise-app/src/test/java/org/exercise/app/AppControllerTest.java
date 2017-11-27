@@ -8,7 +8,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,24 +26,25 @@ public class AppControllerTest {
 		allEmployees = "";
 		employeeController = mock(IEmployeeController.class);
 		appController = new AppController(employeeController);
-
-		when(employeeController.getAllEmployees()).thenReturn(allEmployees);
 	}
 
 	@Test
 	public void testShowAllWhenThereAreNoEmployees() {
+		when(employeeController.getAllEmployees()).thenReturn("");
 		assertShowAll("There are no Employees");
 	}
 
 	@Test
 	public void testShowAllWhenThereIsOneEmployee() {
 		allEmployees = concatNewEmployee("1", "name1");
+		when(employeeController.getAllEmployees()).thenReturn(allEmployees);
 		assertShowAll(allEmployees);
 	}
 
 	@Test
 	public void testShowAllWhenThereAreTwoEmployees() {
 		allEmployees = concatNewEmployee("1", "name1").concat(concatNewEmployee("2", "name2"));
+		when(employeeController.getAllEmployees()).thenReturn(allEmployees);
 		assertShowAll(allEmployees);
 	}
 
