@@ -7,10 +7,10 @@ import com.examples.attsw.exercise.core.model.*;
 public interface Repository {
 
 	/**
-	 * It is assumed that allEmployees() never returns a NULL lists
+	 * It is assumed that allEmployees() never returns a NULL list
 	 */
-	public List<Employee> allEmployees();
-	
-	public Employee oneEmployee(String id);
-	
+	public List<Employee> findAll();
+
+	public Employee findEmployeeById(String id);
+
 }
