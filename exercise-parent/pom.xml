@@ -59,7 +59,7 @@
               <version>4.3.0</version>
               <configuration>
                 <jacocoReports>
-                  <jacocoReport></jacocoReport>
+                  <jacocoReport>${jacoco.report.path}</jacocoReport>
                 </jacocoReports>
               </configuration>
             </plugin>
