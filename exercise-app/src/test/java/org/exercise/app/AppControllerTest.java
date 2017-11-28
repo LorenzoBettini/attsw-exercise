@@ -64,7 +64,6 @@ public class AppControllerTest {
 		String employee = createNewEmployee("1", "name");
 		allEmployees = concatNewEmployee(employee);
 		assertShowOne(employee, "1", employee);
-
 	}
 
 	@Test(expected = IllegalArgumentException.class)
