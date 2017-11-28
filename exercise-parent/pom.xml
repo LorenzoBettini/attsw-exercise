@@ -6,15 +6,16 @@
   <artifactId>exercise-parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  
+
   <modules>
     <module>../exercise-app</module>
     <module>../exercise-core</module>
   </modules>
-  
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jacoco.data.file>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.data.file>
+    <jacoco.report.path>${project.reporting.outputDirectory}/jacoco-ut</jacoco.report.path>
   </properties>
 
   <dependencies>
@@ -48,6 +49,23 @@
         <activeByDefault>false</activeByDefault>
       </activation>
       <build>
+
+        <!-- TODO -->
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.elude.coveralls</groupId>
+              <artifactId>coveralls-maven-plugin</artifactId>
+              <version>4.3.0</version>
+              <configuration>
+                <jacocoReports>
+                  <jacocoReport>${jacoco.report.path}/jacoco.xml</jacocoReport>
+                </jacocoReports>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+
         <plugins>
           <plugin>
             <groupId>org.jacoco</groupId>
@@ -55,12 +73,28 @@
             <version>0.7.9</version>
             <executions>
               <execution>
+                <id>pre-unit-test</id>
                 <goals>
                   <!-- binds by default to the phase "initialize" -->
                   <goal>prepare-agent</goal>
-                  <!-- binds by default to the phase "verify" -->
+                </goals>
+                <configuration>
+                  <destFile>${jacoco.data.file}</destFile>
+                </configuration>
+              </execution>
+              
+              <execution>
+                <id>report-phase</id>
+                <!-- binds this goals to the test phase -->
+                <phase>test</phase>
+                <goals>
+                  <!-- binds by *default* to the phase "verify" -->
                   <goal>report</goal>
                 </goals>
+                <configuration>
+                  <dataFile>${jacoco.data.file}</dataFile>
+                  <outputDirectory>${jacoco.report.path}</outputDirectory>
+                </configuration>
               </execution>
             </executions>
           </plugin>
