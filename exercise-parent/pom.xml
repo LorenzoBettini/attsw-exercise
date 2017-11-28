@@ -50,16 +50,15 @@
       </activation>
       <build>
 
-        <!-- TODO -->
         <pluginManagement>
           <plugins>
             <plugin>
-              <groupId>org.elude.coveralls</groupId>
+              <groupId>org.eluder.coveralls</groupId>
               <artifactId>coveralls-maven-plugin</artifactId>
               <version>4.3.0</version>
               <configuration>
                 <jacocoReports>
-                  <jacocoReport>${jacoco.report.path}</jacocoReport>
+                  <jacocoReport>${project.reporting.outputDirectory}/jacoco.xml</jacocoReport>
                 </jacocoReports>
               </configuration>
             </plugin>
@@ -73,28 +72,12 @@
             <version>0.7.9</version>
             <executions>
               <execution>
-                <id>pre-unit-test</id>
                 <goals>
                   <!-- binds by default to the phase "initialize" -->
                   <goal>prepare-agent</goal>
-                </goals>
-                <configuration>
-                  <destFile>${jacoco.data.file}</destFile>
-                </configuration>
-              </execution>
-              
-              <execution>
-                <id>report-phase</id>
-                <!-- binds this goals to the test phase -->
-                <phase>test</phase>
-                <goals>
                   <!-- binds by *default* to the phase "verify" -->
                   <goal>report</goal>
                 </goals>
-                <configuration>
-                  <dataFile>${jacoco.data.file}</dataFile>
-                  <outputDirectory>${jacoco.report.path}</outputDirectory>
-                </configuration>
               </execution>
             </executions>
           </plugin>
