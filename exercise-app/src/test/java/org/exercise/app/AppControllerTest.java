@@ -29,39 +29,40 @@ public class AppControllerTest {
 
 	@Test
 	public void testShowAllWhenThereAreNoEmployees() {
-		assertShowWhat("There are no Employees", "showAll", "");
+		assertShowWhat("There is no Employees", AppController.SHOW_ALL, "");
 	}
 
 	@Test
 	public void testShowAllWhenThereIsOneEmployee() {
 		allEmployees = concatNewEmployee("1", "name1");
-		assertShowWhat(allEmployees, "showAll", "");
+		assertShowWhat(allEmployees, AppController.SHOW_ALL, "");
 	}
 
 	@Test
 	public void testShowAllWhenThereAreTwoEmployees() {
 		allEmployees = concatNewEmployee("1", "name1").concat(concatNewEmployee("2", "name2"));
-		assertShowWhat(allEmployees, "showAll", "");
+		assertShowWhat(allEmployees, AppController.SHOW_ALL, "");
 	}
 
 	@Test
 	public void testShowOneWhenThereAreNoEmployees() {
-		assertShowWhat("There are no Employees", "showOne", "1");
+		when(employeeController.getEmployeeById("1")).thenReturn("");
+		assertShowWhat("There is no Employee with this id", AppController.SHOW_ONE, "1");
 	}
 
 	@Test
 	public void testShowOneWheneEmployeeDoesNotExists() {
 		allEmployees = concatNewEmployee("1", "name1");
 		when(employeeController.getEmployeeById("2")).thenReturn("");
-		assertShowWhat("There are no Employee with this id", "showOne", "2");
+		assertShowWhat("There is no Employee with this id", AppController.SHOW_ONE, "2");
 	}
 
 	@Test
 	public void testShowOneWhenEmployeeExists() {
 		Employee employee = createNewEmployee("1", "name1");
 		allEmployees = concatNewEmployee(employee.getId(), employee.getName());
-		when(employeeController.getEmployeeById(employee.getId())).thenReturn(employee.getName());
-		assertShowWhat(employee.getName(), "showOne", employee.getId());
+		when(employeeController.getEmployeeById(employee.getId())).thenReturn(employee.toString());
+		assertShowWhat(employee.toString(), AppController.SHOW_ONE, employee.getId());
 	}
 
 	@Test(expected = IllegalArgumentException.class)

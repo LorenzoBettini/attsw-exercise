@@ -20,7 +20,7 @@ public class EmployeeController implements IEmployeeController{
 	}
 
 	public String getEmployeeById(String id) {
-		return employeeService.getEmployeeById(id).getName();
+		return employeeService.getEmployeeById(id).toString();
 	}
 
 }

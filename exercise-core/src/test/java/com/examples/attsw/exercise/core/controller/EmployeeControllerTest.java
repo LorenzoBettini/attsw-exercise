@@ -58,7 +58,7 @@ public class EmployeeControllerTest {
 	public void testGetEmployeeByIdWhenEmployeeExists() {
 		Employee newEmployee = newEmployee("1", "nameTest");
 		when(employeeService.getEmployeeById("1")).thenReturn(newEmployee);
-		assertEquals(newEmployee.getName(), employeeController.getEmployeeById("1"));
+		assertEquals(newEmployee.toString(), employeeController.getEmployeeById("1"));
 	}
 
 	private String extractAllEmployeesStringFromList(List<Employee> allEmployees) {

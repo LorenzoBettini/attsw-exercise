@@ -6,6 +6,8 @@ import com.examples.attsw.exercise.core.controller.IEmployeeController;
 
 public class AppController {
 
+	public static final String SHOW_ONE = "showOne";
+	public static final String SHOW_ALL = "showAll";
 	private IEmployeeController employeeController;
 
 	public AppController(IEmployeeController employeeController) {
@@ -13,23 +15,31 @@ public class AppController {
 	}
 
 	public void performAction(String actionCode, String arg, PrintStream out) throws IllegalArgumentException {
-		if (actionCode.equals("showAll") || actionCode.equals("showOne")) {
-			String allEmployees = employeeController.getAllEmployees();
-			if (!allEmployees.equals("")) {
-				if (actionCode.equals("showAll")) {
-					out.print(allEmployees);
-				} else if (actionCode.equals("showOne")) {
-					String employeeById = employeeController.getEmployeeById(arg);
-					if (employeeById.equals("")) {
-						out.print("There are no Employee with this id");
-					}
-					out.print(employeeById);
-				}
-				return;
-			}
-			out.print("There are no Employees");
-		} else {
+		switch (actionCode) {
+		case SHOW_ALL:
+			caseShowAll(out);
+			return;
+		case SHOW_ONE:
+			caseShowOne(arg, out);
+			return;
+		default:
 			throw new IllegalArgumentException();
+		}
+	}
+
+	private void caseShowOne(String arg, PrintStream out) {
+		String employeeById = employeeController.getEmployeeById(arg);
+		if (employeeById.equals("")) {
+			out.print("There is no Employee with this id");
+		}
+		out.print(employeeById);
+	}
+
+	private void caseShowAll(PrintStream out) {
+		if (!employeeController.getAllEmployees().equals("")) {
+			out.print(employeeController.getAllEmployees());
+		} else {
+			out.print("There is no Employees");
 		}
 	}
 
