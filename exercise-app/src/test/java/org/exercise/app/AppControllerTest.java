@@ -1,7 +1,6 @@
 package org.exercise.app;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayOutputStream;
@@ -10,59 +9,62 @@ import java.nio.charset.StandardCharsets;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import com.examples.attsw.exercise.core.controller.IEmployeeController;
 import com.examples.attsw.exercise.core.model.Employee;
 
 public class AppControllerTest {
 
+	@InjectMocks
 	private AppController appController;
+	@Mock
 	private IEmployeeController employeeController;
 	private String allEmployees;
 
 	@Before
 	public void setUp() throws Exception {
 		allEmployees = "";
-		employeeController = mock(IEmployeeController.class);
-		appController = new AppController(employeeController);
+		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
 	public void testShowAllWhenThereAreNoEmployees() {
-		assertShowWhat("There is no Employees", AppController.SHOW_ALL, "");
+		assertShowAll("There is no Employees");
 	}
 
 	@Test
 	public void testShowAllWhenThereIsOneEmployee() {
-		allEmployees = concatNewEmployee("1", "name1");
-		assertShowWhat(allEmployees, AppController.SHOW_ALL, "");
+		allEmployees = concatNewEmployee(createNewEmployee("1", "name"));
+		assertShowAll(allEmployees);
 	}
 
 	@Test
 	public void testShowAllWhenThereAreTwoEmployees() {
-		allEmployees = concatNewEmployee("1", "name1").concat(concatNewEmployee("2", "name2"));
-		assertShowWhat(allEmployees, AppController.SHOW_ALL, "");
+		allEmployees = concatNewEmployee(createNewEmployee("1", "name1")
+				.concat(concatNewEmployee(createNewEmployee("2", "name2"))));
+		assertShowAll(allEmployees);
 	}
 
 	@Test
 	public void testShowOneWhenThereAreNoEmployees() {
-		when(employeeController.getEmployeeById("1")).thenReturn("");
-		assertShowWhat("There is no Employee with this id", AppController.SHOW_ONE, "1");
+		assertShowOne("There is no Employee with this id", "1", "");
 	}
 
 	@Test
 	public void testShowOneWheneEmployeeDoesNotExists() {
-		allEmployees = concatNewEmployee("1", "name1");
-		when(employeeController.getEmployeeById("2")).thenReturn("");
-		assertShowWhat("There is no Employee with this id", AppController.SHOW_ONE, "2");
+		allEmployees = concatNewEmployee(createNewEmployee("1", "name1"));
+		assertShowOne("There is no Employee with this id", "2", "");
 	}
 
 	@Test
 	public void testShowOneWhenEmployeeExists() {
-		Employee employee = createNewEmployee("1", "name1");
-		allEmployees = concatNewEmployee(employee.getId(), employee.getName());
-		when(employeeController.getEmployeeById(employee.getId())).thenReturn(employee.toString());
-		assertShowWhat(employee.toString(), AppController.SHOW_ONE, employee.getId());
+		String employee = createNewEmployee("1", "name");
+		allEmployees = concatNewEmployee(employee);
+		assertShowOne(employee, "1", employee);
+
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -70,20 +72,29 @@ public class AppControllerTest {
 		assertShowWhat("", "", "");
 	}
 
-	private String concatNewEmployee(String id, String name) {
-		return (createNewEmployee(id, name).toString()).concat(System.getProperty("line.separator"));
+	private String concatNewEmployee(String employee) {
+		return (employee).concat(System.getProperty("line.separator"));
 	}
 
-	private Employee createNewEmployee(String id, String name) {
-		return new Employee(id, name);
+	private String createNewEmployee(String id, String name) {
+		return new Employee(id, name).toString();
 	}
 
-	private void assertShowWhat(String expected, String showWhat, String arg) {
-		when(employeeController.getAllEmployees()).thenReturn(allEmployees);
+	private void assertShowWhat(String expected, String arg, String show) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(baos);
-		appController.performAction(showWhat, arg, out);
+		appController.performAction(show, arg, out);
 		assertEquals(expected, new String(baos.toByteArray(), StandardCharsets.UTF_8));
+	}
+
+	private void assertShowAll(String expected) {
+		when(employeeController.getAllEmployees()).thenReturn(allEmployees);
+		assertShowWhat(expected, "", AppController.SHOW_ALL);
+	}
+
+	private void assertShowOne(String expected, String id, String thenReturn) {
+		when(employeeController.getEmployeeById(id)).thenReturn(thenReturn);
+		assertShowWhat(expected, id, AppController.SHOW_ONE);
 	}
 
 }
