@@ -72,7 +72,7 @@ public class AppControllerTest {
 	}
 
 	private String concatNewEmployee(String employee) {
-		return (employee).concat(System.getProperty("line.separator"));
+		return employee.concat(System.getProperty("line.separator"));
 	}
 
 	private String createNewEmployee(String id, String name) {
@@ -91,8 +91,8 @@ public class AppControllerTest {
 		assertShowWhat(expected, "", AppController.SHOW_ALL);
 	}
 
-	private void assertShowOne(String expected, String id, String thenReturn) {
-		when(employeeController.getEmployeeById(id)).thenReturn(thenReturn);
+	private void assertShowOne(String expected, String id, String stringToReturn) {
+		when(employeeController.getEmployeeById(id)).thenReturn(stringToReturn);
 		assertShowWhat(expected, id, AppController.SHOW_ONE);
 	}
 
