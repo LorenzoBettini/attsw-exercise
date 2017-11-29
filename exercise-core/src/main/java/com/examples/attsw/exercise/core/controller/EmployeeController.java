@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 import com.examples.attsw.exercise.core.service.IEmployeeService;
 
-public class EmployeeController {
+public class EmployeeController implements IEmployeeController{
 
 	private IEmployeeService employeeService;
 
@@ -20,7 +20,7 @@ public class EmployeeController {
 	}
 
 	public String getEmployeeById(String id) {
-		return employeeService.getEmployeeById(id).getName();
+		return employeeService.getEmployeeById(id).toString();
 	}
 
 }
