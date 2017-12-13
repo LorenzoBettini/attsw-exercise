@@ -1,10 +1,8 @@
 package com.examples.attsw.exercise.core.repository.mongo;
 
 import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import com.examples.attsw.exercise.core.model.Employee;
 import com.examples.attsw.exercise.core.repository.Repository;
 import com.github.fakemongo.Fongo;
