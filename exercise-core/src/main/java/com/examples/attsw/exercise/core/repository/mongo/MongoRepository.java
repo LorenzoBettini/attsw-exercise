@@ -3,7 +3,6 @@ package com.examples.attsw.exercise.core.repository.mongo;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
 import com.examples.attsw.exercise.core.model.Employee;
 import com.examples.attsw.exercise.core.repository.Repository;
 import com.mongodb.BasicDBObject;
@@ -15,11 +14,9 @@ import com.mongodb.MongoClient;
 
 public class MongoRepository implements Repository {
 
-	private MongoClient mongoClient;
 	private DBCollection employees;
 
 	public MongoRepository(MongoClient mongoClient) {
-		this.mongoClient = mongoClient;
 		DB db = mongoClient.getDB("factory");
 		employees = db.getCollection("employee");
 	}
